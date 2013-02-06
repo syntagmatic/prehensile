@@ -49,6 +49,10 @@ function gallery(req, res, next) {
   res.sendfile(__dirname + '/gallery.html');
 };
 
+app.get("/simplechart", simplechart);
+function simplechart(req, res, next) {
+  res.sendfile(__dirname + '/simplechart.html');
+};
 
 ///////////////////////////////////////////////////////////////////////////////
 // API endpoints
