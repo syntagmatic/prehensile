@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express')
+  , gesture = require('./gesture');
 
 /*
 //I've left cookie/session code here for when we want users
@@ -43,6 +44,11 @@ function index(req, res, next) {
   res.sendfile(__dirname + '/index.html');
 };
 
+app.get("/gallery", gallery);
+function gallery(req, res, next) {
+  res.sendfile(__dirname + '/gallery.html');
+};
+
 
 ///////////////////////////////////////////////////////////////////////////////
 // API endpoints
@@ -78,12 +84,17 @@ function allGestures(req, res, next) {
     var all = gestures.map(function(d) {
       return {
         id: d._id.valueOf(),
-        description: d.description
+        description: d.description,
+        gesture_length: d.gesture.length,
+        createdAt: d.createdAt.toString()
       }
     });
     res.send(all);
   });
 };
+
+// get one gesture
+app.get("/gesture/:id", gesture.view);
 
 app.listen(port, function() {
   console.log("prehensile running on port", port);
