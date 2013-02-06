@@ -48,6 +48,7 @@ function index(req, res, next) {
 // API endpoints
 ///////////////////////////////////////////////////////////////////////////////
 
+// save a single gesture
 app.post("/save/gesture", saveGesture);
 function saveGesture(req, res, next) {
   //var user = req.session.user;
@@ -70,6 +71,19 @@ function saveGesture(req, res, next) {
   res.send("yay");
 };
 
+// list all gestures
+app.get("/list/all", allGestures);
+function allGestures(req, res, next) {
+  $gestures.find({}).toArray(function(err, gestures) {
+    var all = gestures.map(function(d) {
+      return {
+        id: d._id.valueOf(),
+        description: d.description
+      }
+    });
+    res.send(all);
+  });
+};
 
 app.listen(port, function() {
   console.log("prehensile running on port", port);
