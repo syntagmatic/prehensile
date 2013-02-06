@@ -15,6 +15,26 @@ run the server
 node server.js
 ```
 
+## Viewing
+
+Gesture recorder
+
+  http://0.0.0.0:8080
+
+Gesture gallery (in progress) 
+
+  http://0.0.0.0:8080/gallery
+
+## API
+
+List all gestures
+
+  http://0.0.0.0:8080/list/all
+
+Get a gesture by id
+
+  http://0.0.0.0:8080/gesture/[id]
+
 ## Database
 
 Have mongodb running.
