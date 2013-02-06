@@ -5,6 +5,8 @@ Gesture data collection and analysis.
 
 ## Usage
 
+Requires Node.js and MongoDB.
+
 Install the dependencies
 ```
 npm install
