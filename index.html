@@ -92,8 +92,24 @@ if (recording) {
   record_button.value =  "record gesture";
   var description = prompt("Describe the gesture you just performed.");
 
+  // get the browser
+  var browser = (function(){
+    var N= navigator.appName, ua= navigator.userAgent, tem;
+    var M= ua.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    if(M && (tem= ua.match(/version\/([\.\d]+)/i))!= null) M[2]= tem[1];
+    M= M? [M[1], M[2]]: [N, navigator.appVersion,'-?'];
+    return M;
+   })();
+
   // post gesture to server
-  $.post("/save/gesture", {gesture:recorded, title: "untitiled", description: description}, function(data) {
+  $.post("/save/gesture", {
+    gesture:recorded,
+    title: "untitiled",
+    description: description,
+    browser: browser[0],
+    browser_version: browser[1],
+    platform: navigator.platform,
+  }, function(data) {
     console.log(data);
   })
 

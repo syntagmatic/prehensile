@@ -49,6 +49,11 @@ function gallery(req, res, next) {
   res.sendfile(__dirname + '/gallery.html');
 };
 
+app.get("/diagnostic/*", diagnostic);
+function diagnostic(req, res, next) {
+  res.sendfile(__dirname + '/diagnostic.html');
+};
+
 app.get("/simplechart", simplechart);
 function simplechart(req, res, next) {
   res.sendfile(__dirname + '/simplechart.html');
@@ -65,6 +70,9 @@ function saveGesture(req, res, next) {
   var gesture = req.body.gesture;
   var title = req.body.title;
   var description = req.body.description;
+  var browser = req.body.browser;
+  var browser_version = req.body.browser_version;
+  var platform = req.body.platform;
 
   //we get json object here
   //console.log(data, typeof(data))
@@ -74,7 +82,10 @@ function saveGesture(req, res, next) {
     title: title || "Gesture",
     description: description || "a smooth movement",
     createdAt: new Date(),
-    gesture: gesture
+    gesture: gesture,
+    browser: browser || "unknown",
+    browser_version: browser_version || "unknown",
+    platform: platform || "unknown",
   }
   $gestures.save(data, function(err, result) { if(err) console.error(err); });
 
@@ -86,12 +97,10 @@ app.get("/list/all", allGestures);
 function allGestures(req, res, next) {
   $gestures.find({}).toArray(function(err, gestures) {
     var all = gestures.map(function(d) {
-      return {
-        id: d._id.valueOf(),
-        description: d.description,
-        gesture_length: d.gesture.length,
-        createdAt: d.createdAt.toString()
-      }
+      d.gesture_length = d.gesture.length;
+      delete d.gesture;
+      d._id = d._id.valueOf();
+      return d;
     });
     res.send(all);
   });

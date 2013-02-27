@@ -11,7 +11,7 @@ body {
   margin: 0px 0 0 20px;
 }
 .gesture canvas {
-  margin-top: -50px;
+  margin-top: -34px;
   position: relative;
   z-index: -1;
 }
@@ -21,7 +21,7 @@ body {
 <script>
 d3.json("/list/all", function(error, gestures) {
   gestures.forEach(function(d) {
-    d3.json("/gesture/" + d.id, function(error, data) {
+    d3.json("/gesture/" + d._id, function(error, data) {
       if (error) {
         alert(error.statusText);
         return
@@ -45,7 +45,10 @@ d3.json("/list/all", function(error, gestures) {
     var div = d3.select("#wrap").append("div")
       .attr("class", "gesture");
 
-    div.append("h6").text(d.description);
+    div.append("h6")
+      .append("a")
+      .attr("href", "/diagnostic/" + d._id)
+      .text(d.description);
 
     var canvas = document.createElement("canvas");
     canvas.width = 150;
