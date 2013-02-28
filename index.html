@@ -2,8 +2,22 @@
   <head>
     <style>
     body {
-      font-family: sans-serif;
-      font-size: 13px;
+      font-family: "Myriad Pro", "Myriad Apple", Ubuntu, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+    }
+    #wrap {
+      width: 640px;
+      margin: 48px auto;
+    }
+    h1 {
+      font-size: 48px;
+      font-family: Helvetica;
+    }
+    h1 small {
+      font-size: 24px;
+      font-weight: normal;
+      font-family: "Myriad Pro", "Myriad Apple", Ubuntu, Helvetica, Arial, sans-serif;
+      color: #888;
     }
     p {
       width: 500px;
@@ -25,14 +39,16 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
   </head>
   <body>
-    <h1>Prehensile Leap Gesture Recorder</h1>
-    <p>A utility for recording a few seconds of data from a Leap Motion sensor.</p>
-    <p><strong>Press the record button to begin recording a gesture.</strong><br/>Click it again to output the collected data as JSON text on the page.</p>
-    <p>You can use the data to visualize and analyze a single gesture,<br/>or create a database of gestures to test gesture detection routines.</p>
-    <p id="connection">Leap not detected...</p>
-    <div id="main" style="visibility: visible;">
-      <input type="button" value="record gesture" onclick="record()" id="recorder"></input><strong id="samplesize">0</strong> samples recorded
-      <div id="output" style="font-size: 10px"></div>
+    <div id="wrap">
+      <h1>Prehensile <small>Leap Gesture Recorder</small></h1>
+      <p>A utility for recording a few seconds of data from a Leap Motion sensor.</p>
+      <p><strong>Press the record button to begin recording a gesture.</strong><br/>Click it again to output the collected data as JSON text on the page.</p>
+      <p>You can use the data to visualize and analyze a single gesture,<br/>or create a database of gestures to test gesture detection routines. Once you've saved the gesture, check it out in the <a href="gallery">gallery</a>.</p>
+      <p id="connection">Leap not detected...</p>
+      <div id="main" style="visibility: visible;">
+        <input type="button" value="record gesture" onclick="record()" id="recorder"></input><strong id="samplesize">0</strong> samples recorded
+        <div id="output" style="font-size: 10px"></div>
+      </div>
     </div>
   </body>
 <script>

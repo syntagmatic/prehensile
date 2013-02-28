@@ -2,8 +2,8 @@
 <meta charset="utf-8">
 <style>
 body {
-  font-size: 12px;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Myriad Pro", "Myriad Apple", Ubuntu, Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
 .gesture {
   float: left;
@@ -15,11 +15,27 @@ body {
   position: relative;
   z-index: -1;
 }
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+h1 {
+  font-size: 16px;
+  margin: 8px 0 8px 16px;
+}
+h1 small {
+  margin-left: 12px;
+}
 </style>
-<div id="wrap"></div>
+<div id="wrap">
+  <h1>Gesture Gallery <small><span class="gesture-num"></span> gestures</small></h1>
+</div>
 <script src="/static/js/lib/d3.v3.js"></script>
 <script>
 d3.json("/list/all", function(error, gestures) {
+  d3.select("#gesture-num").text(gestures.length);
   gestures.forEach(function(d) {
     d3.json("/gesture/" + d._id, function(error, data) {
       if (error) {
